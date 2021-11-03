@@ -22,6 +22,8 @@ function App() {
 
       <Switch>
       <Route path="/todo" component={todo} />
+      <Route path="/login" component={login} />
+      <Route path="/register" component={register} />
       </Switch>
 
      
