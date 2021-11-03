@@ -1,21 +1,26 @@
 import { model, Schema } from "mongoose";
-import bcrypt = require("bcrypt");
+import bcrypt from "bcrypt";
+import isEmail from 'validator/lib/isEmail';
+import isAlpha from 'validator/lib/isAlpha';
 
 const UserSchema: Schema = new Schema({
   username: {
     type: String,
-    required: true,
-    minlength: 3,
-    trim: true
+    required: [true, "Username is required"],
+    validate: [isAlpha, "Username can only contain letters"],
+    minlength: [3, "Username must be a minumin length of 3 characters"],
+    lowercase: true
   },
   email: {
     type: String,
-    required: true
+    required: [true, "Email is required"],
+    validate: [isEmail, "Please enter a valid email"],
+    lowercase: true
   },
   password: {
     type: String,
-    required: true,
-    minlength: 10
+    required: [true, "Password is required"],
+    minlength: [10, "Password must be a minimun length of 10 characters"]
   },
   missions: []
 });
